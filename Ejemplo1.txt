@@ -4,7 +4,7 @@
  v1	10		// 10 se asume decimal
  	v2	10d	// 10 en decimal
  v3	10b		// 10 en binario
- v4	10h		// 16 en hexadecimal
+ v4	10h		// 1 en hexadecimal
 
   CODE:
  MOV B, ( v4	)	// B = Mem[3] = 16
