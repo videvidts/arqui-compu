@@ -55,8 +55,6 @@ print(content)
 j = 0
 memory = 0
 
-isArray = False
-
 # Poblar DATA
 while content[j] != 'CODE:':
     if content[j] != 'DATA:':
@@ -69,24 +67,10 @@ while content[j] != 'CODE:':
             data[memory] = [label, value]
             memory += 1
         else:
-            isArray = True
-            array = []
-            k = j
-            while isArray and content[k] != 'CODE:':
-                print(k, content[k])
-                if ' ' in content[k + 1]:
-                    isArray = False
-                # Sacar primer elemento del arreglo de data y convertirlo en arreglo
-                elif ' ' in content[k-1]:
-                    label, value = data[memory - 1]
-                    array.append(label)
-                    array.append([value])
-
-                elif len(array) > 0:
-                    value = getValue(content[k])
-                    array[1].append(value)
-
-                k += 1
+            label, value = data[memory - 1]
+            value = getValue(content[j])
+            data[memory] = [label, value]
+            memory += 1
     j += 1
     
 # Poblar CODE
