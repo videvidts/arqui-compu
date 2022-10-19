@@ -32,6 +32,7 @@ def getValue(value):
         value = bin(int(value)).zfill(16)
     return value
 
+## DEPURAR
 # Poblar content
 with open(inputFile) as f:
     while True:
@@ -58,22 +59,27 @@ memory = 0
 # Poblar DATA
 while content[j] != 'CODE:':
     if content[j] != 'DATA:':
-        # Reconocemos datos que son arreglos
-        if ' ' in content[j]:
-            print('tiene')
-            print(content[j].split(' '))
-            label, value = content[j].split(' ')
-            value = getValue(value)
-            data[memory] = [label, value]
-            memory += 1
+        # Si el value no es un string
+        if "'" not in content[j] and '"' not in content[j]:
+            if ' ' in content[j]:
+                label, value = content[j].split(' ')
+                value = getValue(value)
+                data[memory] = [label, value]
+                memory += 1
+            else:
+                label, value = data[memory - 1]
+                value = getValue(content[j])
+                data[memory] = [label, value]
+                memory += 1
+        
+        # Si el value es un string
         else:
-            label, value = data[memory - 1]
-            value = getValue(content[j])
+            label, value = content[j].split(' ', 1)
+            value = value.replace("'", "")
+            value = ''.join(format(ord(i), '08b') for i in value)
             data[memory] = [label, value]
             memory += 1
     j += 1
-    
-# Poblar CODE
 
 print(data)
 
