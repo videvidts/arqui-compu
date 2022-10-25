@@ -6,7 +6,7 @@ from ast import arg
 
 from input_file_processor import get_content
 from data_controller import get_data_content
-from code_controller import get_code_content, get_labels, get_opcode
+from code_controller import get_code_content, get_labels, get_instructions
 import instructions_opcodes
 
 
@@ -21,6 +21,6 @@ code = get_code_content(file_content)
 labels = get_labels(file_content)
 
 for elem in code:
-    get_opcode(elem, labels)
+    get_instructions(elem, labels)
 
 sys.exit()

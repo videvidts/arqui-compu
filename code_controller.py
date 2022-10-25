@@ -38,17 +38,13 @@ def get_labels(code_content):
     return labels
 
 
-def get_opcode(code_line, labels):
+def get_instructions(code_line, labels):
 
     if not is_label(code_line):
         instruction_type = get_instruction_type(code_line)
-        if '&' in instruction_type:
-            command, label = instruction_type.split('&')
-            labelPosition = labels[label][0]
-    
-        elif has_an_associated_value(instruction_type):
-           instruction, arguments = instruction_type.split(' ')
-           first, second = arguments.split(',')
+        print(instruction_type)
+
+           
 
         #else:  # no hay valor asociado, o sea se hace referencia a registros
         #    opcode = available_assembly_instructions.get_opcode(instruction_type)

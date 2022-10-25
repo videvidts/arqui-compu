@@ -3,6 +3,7 @@ from collections import defaultdict
 
 def load_assembly_instructions(path):
     instructions_dict = {}
+    doubleCycleCommands = ['RET', 'POP', '']
 
     with open(path) as file:
         lines = file.readlines()
@@ -11,16 +12,29 @@ def load_assembly_instructions(path):
 
             command = this_line_list[0]
             parameters = this_line_list[1]
-            if command != 'RET' and command != '':
+            if command not in doubleCycleCommands:
                 opcode = this_line_list[2]
-            else:
-                opcode = this_line_list[1]
 
-
-            if command not in instructions_dict.keys():
-                instructions_dict[command] = {}
+                if command not in instructions_dict.keys():
+                    instructions_dict[command] = {}
+                    instructions_dict[command][parameters] = opcode
+                else:
+                    instructions_dict[command][parameters] = opcode
             else:
-                instructions_dict[command][parameters] = opcode
+                if command != '':
+                    next_line_list = lines[i + 1].strip('\n').replace('\t', ' ').split(' ')
+                    if command == 'POP':
+                        opcode_1 = this_line_list[2]
+                        if command not in instructions_dict.keys():
+                            instructions_dict[command] = {}
+                        else:
+                            instructions_dict[command][parameters] = opcode
+                    else:
+                        opcode_1 = this_line_list[1]
+                        opcode_2 = next_line_list[1]
+                        opcode = [opcode_1, opcode_2]
+                        if command not in instructions_dict.keys():
+                            instructions_dict[command] = {'': opcode}
 
     return AvailableAssemblyInstructions(instructions_dict)
 

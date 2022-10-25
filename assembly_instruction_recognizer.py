@@ -187,12 +187,8 @@ def _get_cmp_type(instruction, parameters):
 
 
 def _get_jxx_call_type(instruction, parameters):
-    if instruction == 'JMP':
-        return f"{instruction + '&' + parameters}"
-    elif instruction == 'JEQ':
-        return f"{instruction + '&' + parameters}"
-    else:
-        print("11 --error para instruccion" + instruction)
+    if parameters == 'Ins':
+        return f"{instruction} Ins"
 
 
 def _get_ret_type(instruction, parameters):
