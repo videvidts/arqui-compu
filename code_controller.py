@@ -42,7 +42,7 @@ def get_instructions(code_line, labels):
 
     if not is_label(code_line):
         instruction_type = get_instruction_type(code_line)
-        print(instruction_type)
+        return instruction_type
 
            
 

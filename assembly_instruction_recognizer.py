@@ -187,8 +187,7 @@ def _get_cmp_type(instruction, parameters):
 
 
 def _get_jxx_call_type(instruction, parameters):
-    if parameters == 'Ins':
-        return f"{instruction} Ins"
+    return f"{instruction} Ins"
 
 
 def _get_ret_type(instruction, parameters):

@@ -21,6 +21,8 @@ code = get_code_content(file_content)
 labels = get_labels(file_content)
 
 for elem in code:
-    get_instructions(elem, labels)
+    instructions = get_instructions(elem, labels)
+
+    print(instructions)
 
 sys.exit()
