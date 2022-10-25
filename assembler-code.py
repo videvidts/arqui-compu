@@ -22,7 +22,7 @@ labels = get_labels(file_content)
 
 for elem in code:
     instructions = get_instructions(elem, labels)
-
-    print(instructions)
+    if instructions is not None:
+        command, params = instructions.split(' ')
 
 sys.exit()
