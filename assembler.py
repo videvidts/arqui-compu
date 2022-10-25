@@ -32,6 +32,7 @@ def getValue(value):
         value = bin(int(value)).zfill(16)
     return value
 
+## DEPURAR
 # Poblar content
 with open(inputFile) as f:
     while True:
@@ -55,41 +56,30 @@ print(content)
 j = 0
 memory = 0
 
-isArray = False
-
 # Poblar DATA
 while content[j] != 'CODE:':
     if content[j] != 'DATA:':
-        # Reconocemos datos que son arreglos
-        if ' ' in content[j]:
-            print('tiene')
-            print(content[j].split(' '))
-            label, value = content[j].split(' ')
-            value = getValue(value)
+        # Si el value no es un string
+        if "'" not in content[j] and '"' not in content[j]:
+            if ' ' in content[j]:
+                label, value = content[j].split(' ')
+                value = getValue(value)
+                data[memory] = [label, value]
+                memory += 1
+            else:
+                label, value = data[memory - 1]
+                value = getValue(content[j])
+                data[memory] = [label, value]
+                memory += 1
+        
+        # Si el value es un string
+        else:
+            label, value = content[j].split(' ', 1)
+            value = value.replace("'", "")
+            value = ''.join(format(ord(i), '08b') for i in value)
             data[memory] = [label, value]
             memory += 1
-        else:
-            isArray = True
-            array = []
-            k = j
-            while isArray and content[k] != 'CODE:':
-                print(k, content[k])
-                if ' ' in content[k + 1]:
-                    isArray = False
-                # Sacar primer elemento del arreglo de data y convertirlo en arreglo
-                elif ' ' in content[k-1]:
-                    label, value = data[memory - 1]
-                    array.append(label)
-                    array.append([value])
-
-                elif len(array) > 0:
-                    value = getValue(content[k])
-                    array[1].append(value)
-
-                k += 1
     j += 1
-    
-# Poblar CODE
 
 print(data)
 
