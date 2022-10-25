@@ -1,6 +1,7 @@
 # Retornar instruccion completa -- 20 bits opcode + 16 bit literal/ direccion
 # ¿que se le va a entregar a mi programa?
 
+from ast import arg
 import re
 import sys
 # sys.argv = argumentos en input, base_prefix = ruta arhcivo, byteorder = endian, excecutable = ruta python
@@ -51,8 +52,6 @@ with open(inputFile) as f:
         if not line:
             break
 
-print(content)
-
 j = 0
 memory = 0
 
@@ -84,3 +83,4 @@ while content[j] != 'CODE:':
 print(data)
 
 sys.exit()
+

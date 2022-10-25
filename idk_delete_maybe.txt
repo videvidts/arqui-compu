@@ -1,0 +1,3 @@
+# Formato instrucción -- 20 bits opcode + 16 bit literal/ direccion (36 bits en total)
+# ¿que se le va a entregar a mi programa?
+# sys.argv = argumentos en input, base_prefix = ruta arhcivo, byteorder = endian, excecutable = ruta python
