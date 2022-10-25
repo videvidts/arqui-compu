@@ -35,8 +35,8 @@ def load_assembly_instructions(path):
                         else:
                             instructions_dict[command][parameters] = opcode
                     elif command == 'NOP':
-                        print("ENTRO")
                         opcode = this_line_list[1]
+                        parameters = ''
                         if command not in instructions_dict.keys():
                             instructions_dict[command] = {}
                             instructions_dict[command][parameters] = opcode

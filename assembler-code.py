@@ -23,6 +23,17 @@ labels = get_labels(file_content)
 for elem in code:
     instructions = get_instructions(elem, labels)
     if instructions is not None:
-        command, params = instructions.split(' ')
+        if instructions == 'RET' or instructions == 'NOP':
+            command = instructions
+            params = ''
+        else:
+            command, params = instructions.split(' ')
+        
+        opcode = available_assembly_instructions[command][params]
+        if command == 'RET' or command == 'POP':
+            for elem in opcode:
+                print(elem)
+        else:
+            print(opcode)
 
 sys.exit()
